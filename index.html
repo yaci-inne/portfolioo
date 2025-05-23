@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Yacine GAHAM</title>
+    <title>Portfolio - Yacine GAHAM | Développeur & Étudiant en Génie Logiciel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Variables */
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #3b82f6;
-            --text-color: #1e293b;
+            --primary-color: #4361ee;
+            --primary-light: #4895ef;
+            --primary-dark: #3a0ca3;
+            --secondary-color: #4cc9f0;
+            --accent-color: #f72585;
+            --text-color: #2b2d42;
             --text-light: #64748b;
+            --text-dark: #1e293b;
             --bg-color: #ffffff;
             --bg-light: #f8fafc;
             --bg-dark: #0f172a;
+            --bg-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            --card-bg: #ffffff;
             --border-color: #e2e8f0;
             --success-color: #10b981;
-            --font-family: 'Poppins', sans-serif;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
             --transition: all 0.3s ease;
+            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.08);
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --border-radius-sm: 4px;
             --border-radius: 8px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 24px;
+            --border-radius-full: 9999px;
         }
 
         /* Reset & Base Styles */
@@ -34,10 +48,11 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
-            font-family: var(--font-family);
+            font-family: var(--font-primary);
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
@@ -68,6 +83,27 @@
 
         section {
             padding: 100px 0;
+            position: relative;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .text-gradient {
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         /* Loader */
@@ -86,17 +122,37 @@
         }
 
         .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--border-color);
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            width: 60px;
+            height: 60px;
+            position: relative;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .loader:before, .loader:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            animation: pulsOut 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 1rem var(--primary-light));
+        }
+
+        .loader:before {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(67, 97, 238, 0.3);
+            animation-delay: 0.5s;
+        }
+
+        .loader:after {
+            width: 75%;
+            height: 75%;
+            background-color: rgba(67, 97, 238, 0.6);
+            top: 12.5%;
+            left: 12.5%;
+        }
+
+        @keyframes pulsOut {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
 
         .loader-wrapper.hidden {
@@ -110,15 +166,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             transition: var(--transition);
             padding: 20px 0;
         }
 
         header.scrolled {
-            background-color: var(--bg-color);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             padding: 15px 0;
         }
 
@@ -128,10 +185,19 @@
             align-items: center;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
         .logo h1 {
             font-size: 28px;
             font-weight: 700;
-            color: var(--primary-color);
+            margin-bottom: 0;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .logo span {
@@ -197,7 +263,7 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             background-color: var(--bg-light);
@@ -212,7 +278,7 @@
             right: -100px;
             width: 500px;
             height: 500px;
-            background-color: rgba(37, 99, 235, 0.05);
+            background-color: rgba(67, 97, 238, 0.05);
             border-radius: 50%;
             z-index: 0;
         }
@@ -224,7 +290,7 @@
             left: -100px;
             width: 300px;
             height: 300px;
-            background-color: rgba(37, 99, 235, 0.05);
+            background-color: rgba(67, 97, 238, 0.05);
             border-radius: 50%;
             z-index: 0;
         }
@@ -250,11 +316,15 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s forwards 0.2s;
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: rgba(67, 97, 238, 0.1);
+            border-radius: var(--border-radius-full);
         }
 
         .title {
             font-size: 48px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 20px;
             line-height: 1.2;
             opacity: 0;
@@ -264,6 +334,19 @@
 
         .title span {
             color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(67, 97, 238, 0.2);
+            z-index: -1;
         }
 
         .description {
@@ -287,25 +370,43 @@
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            border-radius: 30px;
+            border-radius: var(--border-radius-full);
             font-weight: 500;
             font-size: 16px;
             transition: var(--transition);
             cursor: pointer;
             border: none;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn:hover:before {
+            width: 100%;
         }
 
         .btn.primary {
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             color: white;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
 
         .btn.primary:hover {
-            background-color: var(--secondary-color);
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
         }
 
         .btn.secondary {
@@ -342,7 +443,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation: morphShape 8s ease-in-out infinite;
             opacity: 0.1;
@@ -444,10 +545,17 @@
             color: var(--primary-color);
         }
 
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
         .separator {
             width: 80px;
             height: 3px;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             margin: 0 auto;
             position: relative;
         }
@@ -482,7 +590,7 @@
 
         .about-image img {
             width: 100%;
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow);
             background-color: #e2e8f0;
             height: 400px;
@@ -495,7 +603,7 @@
             right: -20px;
             width: 120px;
             height: 120px;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
@@ -509,15 +617,15 @@
         @keyframes pulse {
             0% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+                box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
             }
             70% {
                 transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+                box-shadow: 0 0 0 10px rgba(67, 97, 238, 0);
             }
             100% {
                 transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+                box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
             }
         }
 
@@ -538,8 +646,8 @@
         }
 
         .about-text h3 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
             margin-bottom: 20px;
             color: var(--text-color);
         }
@@ -575,7 +683,7 @@
         }
 
         .qualities h4, .languages h4 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             margin-bottom: 15px;
             color: var(--text-color);
@@ -584,27 +692,45 @@
         .qualities ul {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 15px;
         }
 
         .qualities ul li {
             display: flex;
             align-items: center;
+            background-color: var(--bg-light);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .qualities ul li:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
         }
 
         .qualities ul li i {
             color: var(--success-color);
             margin-right: 10px;
+            font-size: 16px;
         }
 
         .language-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .language-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
         }
 
         .language-name {
-            display: block;
             font-weight: 500;
-            margin-bottom: 5px;
+        }
+
+        .language-percent {
+            color: var(--text-light);
         }
 
         .progress-bar {
@@ -618,7 +744,7 @@
 
         .progress {
             height: 100%;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             border-radius: 4px;
             transition: width 1.5s ease-in-out;
         }
@@ -642,7 +768,7 @@
             right: -100px;
             width: 300px;
             height: 300px;
-            background-color: rgba(37, 99, 235, 0.05);
+            background-color: rgba(67, 97, 238, 0.05);
             border-radius: 50%;
             z-index: 0;
         }
@@ -659,8 +785,8 @@
         }
 
         .skills-text h3 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
             margin-bottom: 15px;
         }
 
@@ -678,18 +804,19 @@
         .skill-category {
             background-color: var(--bg-color);
             padding: 30px;
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow);
             transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
         }
 
         .skill-category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .skill-category h4 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             margin-bottom: 20px;
             color: var(--text-color);
@@ -700,27 +827,36 @@
         .skill-category h4 i {
             color: var(--primary-color);
             margin-right: 10px;
-            font-size: 20px;
+            font-size: 22px;
         }
 
         .skill-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
         }
 
         .skill-name {
-            display: block;
             font-weight: 500;
-            margin-bottom: 5px;
+        }
+
+        .skill-percent {
+            color: var(--text-light);
         }
 
         .other-skills {
             text-align: center;
+            margin-top: 50px;
         }
 
         .other-skills h4 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .other-skills-grid {
@@ -742,24 +878,46 @@
 
         .other-skill-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .other-skill-item:hover i {
+            color: white;
         }
 
         .other-skill-item i {
             color: var(--primary-color);
             margin-right: 10px;
             font-size: 18px;
+            transition: var(--transition);
         }
 
         /* Education Section */
         .education {
             background-color: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(67, 97, 238, 0.05);
+            border-radius: 50%;
+            z-index: 0;
         }
 
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
+            z-index: 1;
         }
 
         .timeline::before {
@@ -770,7 +928,7 @@
             transform: translateX(-50%);
             width: 2px;
             height: 100%;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
         }
 
         .timeline-item {
@@ -785,9 +943,10 @@
             transform: translateX(-50%);
             width: 20px;
             height: 20px;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             border-radius: 50%;
             z-index: 1;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
         }
 
         .timeline-content {
@@ -795,7 +954,7 @@
             width: calc(50% - 40px);
             padding: 30px;
             background-color: var(--bg-light);
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
@@ -810,22 +969,22 @@
 
         .timeline-content:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .timeline-date {
             display: inline-block;
             padding: 5px 15px;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             color: white;
-            border-radius: 20px;
+            border-radius: var(--border-radius-full);
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 15px;
         }
 
         .timeline-content h3 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
             margin-bottom: 10px;
         }
@@ -835,19 +994,207 @@
             margin-bottom: 15px;
         }
 
+        .timeline-content ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .timeline-content ul li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .timeline-content ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
         .badge {
             display: inline-block;
             padding: 5px 10px;
-            background-color: rgba(37, 99, 235, 0.1);
+            background-color: rgba(67, 97, 238, 0.1);
             color: var(--primary-color);
-            border-radius: 4px;
+            border-radius: var(--border-radius);
             font-size: 14px;
+            font-weight: 500;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Projects Section */
+        .projects {
+            background-color: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(67, 97, 238, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .projects-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: var(--bg-color);
+            border: none;
+            border-radius: var(--border-radius-full);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tag {
+            padding: 5px 10px;
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            border-radius: var(--border-radius);
+            font-size: 12px;
             font-weight: 500;
         }
 
         /* Contact Section */
         .contact {
-            background-color: var(--bg-light);
+            background-color: var(--bg-color);
             position: relative;
             overflow: hidden;
         }
@@ -859,7 +1206,7 @@
             right: -100px;
             width: 300px;
             height: 300px;
-            background-color: rgba(37, 99, 235, 0.05);
+            background-color: rgba(67, 97, 238, 0.05);
             border-radius: 50%;
             z-index: 0;
         }
@@ -879,12 +1226,21 @@
             display: flex;
             align-items: flex-start;
             margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius-lg);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
         }
 
         .contact-item .icon {
             width: 50px;
             height: 50px;
-            background-color: rgba(37, 99, 235, 0.1);
+            background-color: rgba(67, 97, 238, 0.1);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -896,9 +1252,8 @@
         }
 
         .contact-item:hover .icon {
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             color: white;
-            transform: translateY(-3px);
         }
 
         .contact-item .text h4 {
@@ -909,6 +1264,7 @@
 
         .contact-item .text p {
             color: var(--text-light);
+            margin-bottom: 0;
         }
 
         .social-links {
@@ -918,9 +1274,9 @@
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
-            background-color: var(--bg-color);
+            width: 45px;
+            height: 45px;
+            background-color: var(--bg-light);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -928,21 +1284,32 @@
             color: var(--primary-color);
             font-size: 18px;
             transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
         }
 
         .social-link:hover {
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             color: white;
             transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
         .contact-form {
             flex: 1;
+            background-color: var(--bg-light);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
         }
 
         .form-group {
             margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .form-group input,
@@ -951,9 +1318,10 @@
             padding: 15px;
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            font-family: var(--font-family);
+            font-family: var(--font-primary);
             font-size: 16px;
             transition: var(--transition);
+            background-color: var(--bg-color);
         }
 
         .form-group textarea {
@@ -965,12 +1333,12 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
         }
 
         /* Footer */
         footer {
-            background-color: var(--bg-dark);
+            background: var(--bg-dark);
             color: white;
             padding: 30px 0;
         }
@@ -983,12 +1351,13 @@
 
         .copyright p {
             font-size: 14px;
+            margin-bottom: 0;
         }
 
         .back-to-top a {
             width: 40px;
             height: 40px;
-            background-color: var(--primary-color);
+            background: var(--bg-gradient);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -999,8 +1368,8 @@
         }
 
         .back-to-top a:hover {
-            background-color: var(--secondary-color);
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
         }
 
         /* Animations */
@@ -1071,6 +1440,10 @@
             .timeline-dot {
                 left: 20px;
             }
+
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
         }
 
         @media screen and (max-width: 768px) {
@@ -1127,6 +1500,10 @@
             .qualities ul {
                 grid-template-columns: 1fr;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media screen and (max-width: 576px) {
@@ -1150,6 +1527,15 @@
             .experience-badge .text {
                 font-size: 10px;
             }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 6px 15px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -1171,6 +1557,7 @@
                     <li><a href="#apropos">À propos</a></li>
                     <li><a href="#competences">Compétences</a></li>
                     <li><a href="#formation">Formation</a></li>
+                    <li><a href="#projets">Projets</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -1187,10 +1574,10 @@
                 <div class="text-content">
                     <h4 class="subtitle">Étudiant en Génie Logiciel</h4>
                     <h1 class="title">GAHAM <span>Yacine</span></h1>
-                    <p class="description">Passionné par l'ingénierie logicielle et la sécurité des systèmes, je possède une solide expertise en développement, réseaux et administration système.</p>
+                    <p class="description">Passionné par l'ingénierie logicielle et la sécurité des systèmes, je possède une solide expertise en développement web, mobile et en administration système. Mon objectif est de créer des solutions innovantes qui répondent aux défis technologiques actuels.</p>
                     <div class="cta-buttons">
                         <a href="#contact" class="btn primary">Me contacter</a>
-                        <a href="#competences" class="btn secondary">Mes compétences</a>
+                        <a href="#projets" class="btn secondary">Voir mes projets</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -1220,11 +1607,12 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">À propos de <span>moi</span></h2>
+                <p class="section-subtitle">Découvrez mon parcours, mes compétences et mes aspirations professionnelles</p>
                 <div class="separator"></div>
             </div>
             <div class="about-content">
                 <div class="about-image">
-                    <div style="width: 100%; height: 400px; background-color: #e2e8f0; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
+                    <div style="width: 100%; height: 400px; background-color: #e2e8f0; border-radius: 16px; display: flex; justify-content: center; align-items: center;">
                         <i class="fas fa-user" style="font-size: 100px; color: #94a3b8;"></i>
                     </div>
                     <div class="experience-badge">
@@ -1235,6 +1623,8 @@
                 <div class="about-text">
                     <h3>Étudiant en Master Génie Logiciel</h3>
                     <p>Actuellement en Master 1 Génie Logiciel à l'Université Abderrahmane Mira de Bejaia, je suis passionné par l'ingénierie logicielle et la sécurité des systèmes. Mon parcours académique et mes projets pratiques m'ont permis de développer une approche méthodique et proactive face aux défis technologiques.</p>
+                    
+                    <p>Je m'intéresse particulièrement au développement d'applications web et mobiles, ainsi qu'à l'architecture logicielle. Mon objectif est de concevoir des solutions innovantes qui allient performance, sécurité et expérience utilisateur optimale.</p>
                     
                     <div class="info-grid">
                         <div class="info-item">
@@ -1251,7 +1641,7 @@
                         </div>
                         <div class="info-item">
                             <span class="info-title">Téléphone:</span>
-                            <span class="info-value">+213549109209</span>
+                            <span class="info-value">+213 549 109 209</span>
                         </div>
                     </div>
                     
@@ -1268,28 +1658,40 @@
                     <div class="languages">
                         <h4>Langues</h4>
                         <div class="language-item">
-                            <span class="language-name">Français</span>
+                            <div class="language-header">
+                                <span class="language-name">Français</span>
+                                <span class="language-percent">80%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" style="width: 80%"></div>
                             </div>
                             <span class="language-level">Bonne maîtrise (B2)</span>
                         </div>
                         <div class="language-item">
-                            <span class="language-name">Anglais</span>
+                            <div class="language-header">
+                                <span class="language-name">Anglais</span>
+                                <span class="language-percent">85%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" style="width: 85%"></div>
                             </div>
                             <span class="language-level">Très bonne maîtrise</span>
                         </div>
                         <div class="language-item">
-                            <span class="language-name">Arabe</span>
+                            <div class="language-header">
+                                <span class="language-name">Arabe</span>
+                                <span class="language-percent">90%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" style="width: 90%"></div>
                             </div>
                             <span class="language-level">Très bonne maîtrise</span>
                         </div>
                         <div class="language-item">
-                            <span class="language-name">Kabyle</span>
+                            <div class="language-header">
+                                <span class="language-name">Kabyle</span>
+                                <span class="language-percent">100%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" style="width: 100%"></div>
                             </div>
@@ -1306,6 +1708,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Mes <span>compétences</span></h2>
+                <p class="section-subtitle">Un aperçu des technologies et outils que je maîtrise</p>
                 <div class="separator"></div>
             </div>
             
@@ -1319,15 +1722,30 @@
                     <div class="skill-category">
                         <h4><i class="fas fa-code"></i> Langages de programmation</h4>
                         <div class="skill-item">
-                            <span class="skill-name">Langage C</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Langage C</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">Java (POO)</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Java (POO)</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="75%"></div>
                             </div>
                         </div>
                     </div>
@@ -1335,25 +1753,37 @@
                     <div class="skill-category">
                         <h4><i class="fas fa-globe"></i> Développement Web</h4>
                         <div class="skill-item">
-                            <span class="skill-name">HTML/CSS</span>
+                            <div class="skill-header">
+                                <span class="skill-name">HTML/CSS</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="90%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">JavaScript</span>
+                            <div class="skill-header">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">PHP</span>
+                            <div class="skill-header">
+                                <span class="skill-name">PHP</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="75%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">Bootstrap 5</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Bootstrap 5</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
                             </div>
@@ -1363,15 +1793,30 @@
                     <div class="skill-category">
                         <h4><i class="fas fa-mobile-alt"></i> Développement Mobile</h4>
                         <div class="skill-item">
-                            <span class="skill-name">React Native</span>
+                            <div class="skill-header">
+                                <span class="skill-name">React Native</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="80%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">Cordova</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Cordova</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Flutter</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="70%"></div>
                             </div>
                         </div>
                     </div>
@@ -1379,15 +1824,30 @@
                     <div class="skill-category">
                         <h4><i class="fas fa-database"></i> Bases de données</h4>
                         <div class="skill-item">
-                            <span class="skill-name">SQL</span>
+                            <div class="skill-header">
+                                <span class="skill-name">SQL</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">Firebase</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Firebase</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">MongoDB</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="70%"></div>
                             </div>
                         </div>
                     </div>
@@ -1395,15 +1855,61 @@
                     <div class="skill-category">
                         <h4><i class="fas fa-laptop-code"></i> Systèmes & Architecture</h4>
                         <div class="skill-item">
-                            <span class="skill-name">Systèmes d'exploitation</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Systèmes d'exploitation</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="90%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <span class="skill-name">Architecture matérielle</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Architecture matérielle</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Réseaux informatiques</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4><i class="fas fa-tools"></i> Outils & Frameworks</h4>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Git & GitHub</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">VS Code</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">Docker</span>
+                                <span class="skill-percent">70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" data-width="70%"></div>
                             </div>
                         </div>
                     </div>
@@ -1416,6 +1922,18 @@
                             <i class="fas fa-car"></i>
                             <span>Permis de conduire (catégorie B)</span>
                         </div>
+                        <div class="other-skill-item">
+                            <i class="fas fa-users"></i>
+                            <span>Travail en équipe</span>
+                        </div>
+                        <div class="other-skill-item">
+                            <i class="fas fa-language"></i>
+                            <span>Communication multilingue</span>
+                        </div>
+                        <div class="other-skill-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Gestion de projet</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1426,7 +1944,8 @@
     <section id="formation" class="education">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Ma <span>formation</span></h2>
+                <h2 class="section-title">Mon <span>parcours académique</span></h2>
+                <p class="section-subtitle">Découvrez mon parcours éducatif et mes formations</p>
                 <div class="separator"></div>
             </div>
             
@@ -1437,7 +1956,16 @@
                         <div class="timeline-date">2023 - 2024</div>
                         <h3>Master 1 en Génie Logiciel</h3>
                         <p>Université Abderrahmane Mira, Bejaia</p>
-                        <span class="badge">En cours</span>
+                        <ul>
+                            <li>Conception et architecture logicielle avancée</li>
+                            <li>Développement d'applications distribuées</li>
+                            <li>Sécurité des systèmes d'information</li>
+                            <li>Intelligence artificielle et apprentissage automatique</li>
+                        </ul>
+                        <div>
+                            <span class="badge">En cours</span>
+                            <span class="badge">Projet de recherche</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -1447,7 +1975,16 @@
                         <div class="timeline-date">2022 - 2023</div>
                         <h3>Licence en Informatique</h3>
                         <p>Université Abderrahmane Mira, Bejaia</p>
-                        <span class="badge">3ème année</span>
+                        <ul>
+                            <li>Développement web et mobile</li>
+                            <li>Bases de données avancées</li>
+                            <li>Réseaux et systèmes distribués</li>
+                            <li>Projet de fin d'études: Application de gestion de bibliothèque</li>
+                        </ul>
+                        <div>
+                            <span class="badge">3ème année</span>
+                            <span class="badge">Mention Bien</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -1457,7 +1994,16 @@
                         <div class="timeline-date">2021 - 2022</div>
                         <h3>Licence en Informatique</h3>
                         <p>Université Abderrahmane Mira, Bejaia</p>
-                        <span class="badge">2ème année</span>
+                        <ul>
+                            <li>Algorithmes et structures de données</li>
+                            <li>Programmation orientée objet</li>
+                            <li>Systèmes d'exploitation</li>
+                            <li>Bases de données relationnelles</li>
+                        </ul>
+                        <div>
+                            <span class="badge">2ème année</span>
+                            <span class="badge">Mention Bien</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -1467,7 +2013,16 @@
                         <div class="timeline-date">2020 - 2021</div>
                         <h3>Licence en Mathématiques et Informatique</h3>
                         <p>Université Abderrahmane Mira, Bejaia</p>
-                        <span class="badge">1ère année</span>
+                        <ul>
+                            <li>Introduction à la programmation</li>
+                            <li>Mathématiques pour l'informatique</li>
+                            <li>Architecture des ordinateurs</li>
+                            <li>Algèbre et analyse</li>
+                        </ul>
+                        <div>
+                            <span class="badge">1ère année</span>
+                            <span class="badge">Mention Assez Bien</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -1477,7 +2032,196 @@
                         <div class="timeline-date">2020</div>
                         <h3>Baccalauréat Scientifique</h3>
                         <p>Lycée Hamza Ibn El-Hassan El Alaoui, Bouira</p>
-                        <span class="badge">Mention assez bien (13.93)</span>
+                        <ul>
+                            <li>Spécialité Sciences</li>
+                            <li>Formation en mathématiques, physique et sciences naturelles</li>
+                            <li>Projet de fin d'études sur les énergies renouvelables</li>
+                        </ul>
+                        <div>
+                            <span class="badge">Mention Assez Bien (13.93)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <h3>Certification en Développement Web</h3>
+                        <p>Formation en ligne - Udemy</p>
+                        <ul>
+                            <li>HTML5, CSS3, JavaScript avancé</li>
+                            <li>Frameworks front-end (React)</li>
+                            <li>Développement back-end avec Node.js</li>
+                            <li>Projet pratique: Site e-commerce responsive</li>
+                        </ul>
+                        <div>
+                            <span class="badge">Certification</span>
+                            <span class="badge">60 heures</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projets" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mes <span>projets</span></h2>
+                <p class="section-subtitle">Découvrez mes réalisations académiques et personnelles</p>
+                <div class="separator"></div>
+            </div>
+            
+            <div class="projects-content">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile</button>
+                    <button class="filter-btn" data-filter="desktop">Desktop</button>
+                    <button class="filter-btn" data-filter="autre">Autre</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <div style="width: 100%; height: 100%; background-color: #e2e8f0; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-book" style="font-size: 50px; color: #94a3b8;"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                    <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Système de Gestion de Bibliothèque</h3>
+                            <p class="project-description">Application web complète pour la gestion d'une bibliothèque universitaire, incluant la gestion des emprunts, des retours et des réservations de livres.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">PHP</span>
+                                <span class="project-tag">MySQL</span>
+                                <span class="project-tag">JavaScript</span>
+                                <span class="project-tag">Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="mobile">
+                        <div class="project-image">
+                            <div style="width: 100%; height: 100%; background-color: #e2e8f0; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-mobile-alt" style="font-size: 50px; color: #94a3b8;"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                    <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Application de Suivi Fitness</h3>
+                            <p class="project-description">Application mobile permettant aux utilisateurs de suivre leurs activités physiques, de planifier des entraînements et de surveiller leur progression.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">React Native</span>
+                                <span class="project-tag">Firebase</span>
+                                <span class="project-tag">Redux</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="web">
+                        <div class="project-image">
+                            <div style="width: 100%; height: 100%; background-color: #e2e8f0; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-shopping-cart" style="font-size: 50px; color: #94a3b8;"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                    <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Plateforme E-commerce</h3>
+                            <p class="project-description">Site web e-commerce complet avec panier d'achat, système de paiement, gestion des commandes et interface d'administration.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                                <span class="project-tag">PHP</span>
+                                <span class="project-tag">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="desktop">
+                        <div class="project-image">
+                            <div style="width: 100%; height: 100%; background-color: #e2e8f0; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-desktop" style="font-size: 50px; color: #94a3b8;"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                    <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Logiciel de Gestion d'Inventaire</h3>
+                            <p class="project-description">Application desktop pour la gestion d'inventaire d'une entreprise, avec suivi des stocks, alertes de réapprovisionnement et génération de rapports.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Java</span>
+                                <span class="project-tag">JavaFX</span>
+                                <span class="project-tag">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="autre">
+                        <div class="project-image">
+                            <div style="width: 100%; height: 100%; background-color: #e2e8f0; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-robot" style="font-size: 50px; color: #94a3b8;"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                    <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Système de Reconnaissance d'Images</h3>
+                            <p class="project-description">Projet d'intelligence artificielle utilisant des techniques de deep learning pour la reconnaissance et la classification d'images.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">TensorFlow</span>
+                                <span class="project-tag">OpenCV</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="mobile">
+                        <div class="project-image">
+                            <div style="width: 100%; height: 100%; background-color: #e2e8f0; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-calendar-alt" style="font-size: 50px; color: #94a3b8;"></i>
+                            </div>
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link"><i class="fas fa-link"></i></a>
+                                    <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Application de Gestion de Tâches</h3>
+                            <p class="project-description">Application mobile de gestion de tâches avec fonctionnalités de rappels, catégorisation, et synchronisation multi-appareils.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Flutter</span>
+                                <span class="project-tag">Dart</span>
+                                <span class="project-tag">Firebase</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1489,6 +2233,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Me <span>contacter</span></h2>
+                <p class="section-subtitle">N'hésitez pas à me contacter pour discuter de vos projets ou opportunités</p>
                 <div class="separator"></div>
             </div>
             
@@ -1524,25 +2269,41 @@
                         </div>
                     </div>
                     
+                    <div class="contact-item">
+                        <div class="icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="text">
+                            <h4>Université</h4>
+                            <p>Université Abderrahmane Mira, Bejaia</p>
+                        </div>
+                    </div>
+                    
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-github"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
                 
                 <div class="contact-form">
                     <form id="contactForm">
                         <div class="form-group">
+                            <label for="name">Nom complet</label>
                             <input type="text" id="name" name="name" placeholder="Votre nom" required>
                         </div>
                         <div class="form-group">
+                            <label for="email">Adresse email</label>
                             <input type="email" id="email" name="email" placeholder="Votre email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Sujet" required>
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" placeholder="Sujet de votre message" required>
                         </div>
                         <div class="form-group">
+                            <label for="message">Message</label>
                             <textarea id="message" name="message" placeholder="Votre message" required></textarea>
                         </div>
                         <button type="submit" class="btn primary">Envoyer le message</button>
@@ -1691,7 +2452,7 @@
             }
 
             // Add fade-in class to elements
-            document.querySelectorAll('.skill-category, .timeline-item, .contact-item').forEach(item => {
+            document.querySelectorAll('.skill-category, .timeline-item, .contact-item, .project-card').forEach(item => {
                 item.classList.add('fade-in');
             });
 
@@ -1710,6 +2471,34 @@
                     }
                 }
             }
+
+            // Project filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
 
             // Initial check
             checkFadeElements();
